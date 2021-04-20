@@ -1,7 +1,5 @@
 package com.mirkoh.model;
 
-import java.util.Formatter;
-
 public class Student {
     private int id;
     private String ime;
