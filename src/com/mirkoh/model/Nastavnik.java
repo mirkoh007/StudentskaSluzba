@@ -1,20 +1,21 @@
 package com.mirkoh.model;
 
-public class Student {
+public class Nastavnik {
+
     private int id;
     private String ime;
     private String prezime;
-    private String grad;
-    private String indeks;
+    private String zvanje;
 
-    private Student() {}
+    private Nastavnik() {
+    }
 
     public static class Builder {
+
         private int id;
         private String ime;
         private String prezime;
-        private String grad;
-        private String indeks;
+        private String zvanje;
 
         public Builder() {}
 
@@ -22,7 +23,6 @@ public class Student {
             this.id = id;
             return this;
         }
-
         public Builder withIme(String ime) {
             this.ime = ime;
             return this;
@@ -33,36 +33,29 @@ public class Student {
             return this;
         }
 
-        public Builder withGrad(String grad) {
-            this.grad = grad;
+        public Builder withZvanje(String zvanje) {
+            this.zvanje = zvanje;
             return this;
         }
 
-        public Builder withIndeks(String indeks) {
-            this.indeks = indeks;
-            return this;
-        }
+        public Nastavnik build() {
+            Nastavnik nastavnik = new Nastavnik();
+            nastavnik.id = this.id;
+            nastavnik.ime = this.ime;
+            nastavnik.prezime = this.prezime;
+            nastavnik.zvanje = this.zvanje;
 
-        public Student build() {
-            Student student = new Student();
-            student.id = this.id;
-            student.ime = this.ime;
-            student.prezime = this.prezime;
-            student.grad = this.grad;
-            student.indeks = this.indeks;
-
-            return student;
+            return nastavnik;
         }
     }
 
     @Override
     public String toString() {
-        return "Student{" +
+        return "Nastavnik{" +
                 "id=" + id +
-                ", indeks='" + indeks + '\'' +
                 ", ime='" + ime + '\'' +
                 ", prezime='" + prezime + '\'' +
-                ", grad='" + grad + '\'' +
+                ", zvanje='" + zvanje + '\'' +
                 '}';
     }
 
@@ -90,19 +83,11 @@ public class Student {
         this.prezime = prezime;
     }
 
-    public String getGrad() {
-        return grad;
+    public String getZvanje() {
+        return zvanje;
     }
 
-    public void setGrad(String grad) {
-        this.grad = grad;
-    }
-
-    public String getIndeks() {
-        return indeks;
-    }
-
-    public void setIndeks(String indeks) {
-        this.indeks = indeks;
+    public void setZvanje(String zvanje) {
+        this.zvanje = zvanje;
     }
 }
