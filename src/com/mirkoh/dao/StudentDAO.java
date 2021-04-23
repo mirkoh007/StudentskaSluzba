@@ -43,4 +43,35 @@ public class StudentDAO {
         }
         return sviStudenti;
     }
+
+    public static Student pronadjiStudentaPoID(Connection conn, int id) {
+        String query = "SELECT indeks, ime, prezime, grad FROM studenti WHERE student_id = " + id;
+        Student student = null;
+
+        try (
+                Statement statement = conn.createStatement();
+                ResultSet resultSet = statement.executeQuery(query)
+        ) {
+            if(resultSet.next()) {
+                String indeks = resultSet.getString(1);
+                String ime = resultSet.getString(2);
+                String prezime = resultSet.getString(3);
+                String grad = resultSet.getString(4);
+
+                student = new Student.Builder()
+                        .withId(id)
+                        .withIndeks(indeks)
+                        .withIme(ime)
+                        .withPrezime(prezime)
+                        .withGrad(grad)
+                        .build();
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Nesto je krenulo po zlu!");
+            e.printStackTrace();
+        }
+
+        return student;
+    }
 }
