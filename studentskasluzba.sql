@@ -1,3 +1,7 @@
+
+DROP SCHEMA IF EXISTS studentskasluzba;
+CREATE SCHEMA studentskasluzba DEFAULT CHARACTER SET utf8;
+
 use studentskasluzba;
 
 	
