@@ -74,4 +74,63 @@ public class StudentDAO {
 
         return student;
     }
+
+    public static Student pronadjiStudentaPoIndeksu(Connection conn, String indeks) {
+        String query = "SELECT student_id, ime, prezime, grad FROM studenti WHERE indeks = '" + indeks + "'";
+        Student student = null;
+        try (
+                Statement statement = conn.createStatement();
+                ResultSet resultSet = statement.executeQuery(query)
+                ) {
+            while (resultSet.next()) {
+                int id = resultSet.getInt(1);
+                String ime = resultSet.getString(2);
+                String prezime = resultSet.getString(3);
+                String grad = resultSet.getString(4);
+
+                student = new Student.Builder()
+                        .withId(id)
+                        .withIme(ime)
+                        .withPrezime(prezime)
+                        .withIndeks(indeks)
+                        .withGrad(grad)
+                        .build();
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Nesto je krenulo po zlu");
+            e.printStackTrace();
+        }
+        return student;
+    }
+
+    public static Student pronadjiStudentaPoImenu(Connection conn, String ime) {
+        String query = "SELECT student_id, indeks, prezime, grad FROM studenti WHERE ime LIKE '%" + ime +"%'";
+        Student student = null;
+        try (
+               Statement statement = conn.createStatement();
+               ResultSet resultSet = statement.executeQuery(query)
+                ) {
+            while (resultSet.next()) {
+                int id = resultSet.getInt(1);
+                String indeks = resultSet.getString(2);
+                String prezime = resultSet.getNString(3);
+                String grad = resultSet.getString(4);
+
+                student = new Student.Builder()
+                        .withId(id)
+                        .withIme(ime)
+                        .withPrezime(prezime)
+                        .withIndeks(indeks)
+                        .withGrad(grad)
+                        .build();
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Nesto je krenulo po zlu!");
+            e.printStackTrace();
+        }
+
+        return student;
+    }
 }

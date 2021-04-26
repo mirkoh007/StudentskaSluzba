@@ -1,5 +1,6 @@
 package com.mirkoh.utils;
 
+import java.util.Locale;
 import java.util.Scanner;
 
 public class ScannerWrapper {
@@ -23,4 +24,11 @@ public class ScannerWrapper {
         return ceoBroj;
     }
 
+    public static String ocitajString() {
+        String string = "";
+        while (string == null || string.equals("")) {
+            string = scanner.nextLine();
+        }
+        return string;
+    }
 }

@@ -26,6 +26,12 @@ public class StudentUI {
                 case 2:
                     PronadjiStudentaPoID();
                     break;
+                case 3:
+                    PronadjiStudentaPoIndeksu();
+                    break;
+                case 4:
+                    PronadjiStudentaPoImenu();
+                    break;
                 default:
                     System.out.println("Nepostojeca opcija!");
                     break;
@@ -34,10 +40,14 @@ public class StudentUI {
     }
 
 
+
+
     private static void ispisiMeni() {
         System.out.println("Rad sa studentima - opcije:");
         System.out.println("\tOpcija broj 1 - Ispis svih studenata");
         System.out.println("\tOpcija broj 2 - Pronadji studenta po ID");
+        System.out.println("\tOpcija broj 3 - Pronadji studenta po INDEKSU");
+        System.out.println("\tOpcija broj 4 - Pronadji studenta po IMENU");
         System.out.println("\tOpcija broj 0 - IZLAZ");
     }
 
@@ -56,8 +66,32 @@ public class StudentUI {
         }else {
             System.out.println("Student sa id: " + id + " ne postoji!");
         }
+    }
 
+    private static void PronadjiStudentaPoIndeksu() {
+        Student student = null;
+        System.out.println("Unesi INDEKS studenta:");
+        String indeks = ScannerWrapper.ocitajString();
+        student = StudentDAO.pronadjiStudentaPoIndeksu(Application.conn, indeks);
+        if(student != null) {
+            System.out.println(student);
+            System.out.println();
+        } else {
+            System.out.println("Student sa indeksom " + indeks + " ne postoji!");
+        }
+    }
 
+    private static void PronadjiStudentaPoImenu() {
+        Student student = null;
+        System.out.println("Unesi ime studenta:");
+        String ime = ScannerWrapper.ocitajString();
+        student = StudentDAO.pronadjiStudentaPoImenu(Application.conn, ime);
+        if(student !=null) {
+            System.out.println(student);
+            System.out.println();
+        } else {
+            System.out.println("Student sa imenom " + ime + " ne postoji.");
+        }
     }
 
 }
