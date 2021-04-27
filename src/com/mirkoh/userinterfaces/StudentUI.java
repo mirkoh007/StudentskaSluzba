@@ -5,6 +5,7 @@ import com.mirkoh.dao.StudentDAO;
 import com.mirkoh.model.Student;
 import com.mirkoh.utils.ScannerWrapper;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class StudentUI {
@@ -59,7 +60,7 @@ public class StudentUI {
     }
 
     private static void PronadjiStudentaPoID() {
-        Student student = null;
+        Student student;
         System.out.println("Unesi ID studenta: ");
         int id = ScannerWrapper.ocitajCeoBroj();
         student = StudentDAO.pronadjiStudentaPoID(Application.conn, id);
@@ -71,7 +72,7 @@ public class StudentUI {
     }
 
     private static void PronadjiStudentaPoIndeksu() {
-        Student student = null;
+        Student student;
         System.out.println("Unesi INDEKS studenta:");
         String indeks = ScannerWrapper.ocitajString();
         student = StudentDAO.pronadjiStudentaPoIndeksu(Application.conn, indeks);
@@ -84,28 +85,26 @@ public class StudentUI {
     }
 
     private static void PronadjiStudentaPoImenu() {
-        Student student = null;
+        List<Student> studenti;
         System.out.println("Unesi ime studenta:");
         String ime = ScannerWrapper.ocitajString();
-        student = StudentDAO.pronadjiStudentaPoImenu(Application.conn, ime);
-        if(student !=null) {
-            System.out.println(student);
-            System.out.println();
+        studenti = StudentDAO.pronadjiStudentaPoImenu(Application.conn, ime);
+        if(studenti !=null) {
+            studenti.forEach(System.out::println);
         } else {
-            System.out.println("Student sa imenom " + ime + " ne postoji.");
+            System.out.println("Student(i) sa imenom " + ime + " ne postoji(e).");
         }
     }
 
     private static void PronadjiStudentaPoPrezimenu() {
-        Student student = null;
+        List<Student> studenti;
         System.out.println("Unesi prezime studenta:");
         String prezime = ScannerWrapper.ocitajString();
-        student = StudentDAO.pronadjiPoPrezimenu(Application.conn, prezime);
-        if(student != null) {
-            System.out.println(student);
-            System.out.println();
+        studenti = StudentDAO.pronadjiPoPrezimenu(Application.conn, prezime);
+        if(studenti != null) {
+            studenti.forEach(System.out::println);
         } else {
-            System.out.println("Student sa prezimenom " + prezime + " ne postoji.");
+            System.out.println("Student(i) sa prezimenom " + prezime + " ne postoji(e).");
         }
     }
 

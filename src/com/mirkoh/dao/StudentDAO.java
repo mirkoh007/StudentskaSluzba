@@ -104,9 +104,9 @@ public class StudentDAO {
         return student;
     }
 
-    public static Student pronadjiStudentaPoImenu(Connection conn, String ime) {
-        String query = "SELECT student_id, indeks, prezime, grad FROM studenti WHERE ime LIKE '%" + ime +"%'";
-        Student student = null;
+    public static List<Student> pronadjiStudentaPoImenu(Connection conn, String ime1) {
+        String query = "SELECT student_id, indeks, ime, prezime, grad FROM studenti WHERE ime LIKE '%" + ime1 +"%'";
+        List<Student> studenti = new ArrayList<>();
         try (
                Statement statement = conn.createStatement();
                ResultSet resultSet = statement.executeQuery(query)
@@ -114,16 +114,17 @@ public class StudentDAO {
             while (resultSet.next()) {
                 int id = resultSet.getInt(1);
                 String indeks = resultSet.getString(2);
-                String prezime = resultSet.getNString(3);
-                String grad = resultSet.getString(4);
+                String ime = resultSet.getString(3);
+                String prezime = resultSet.getNString(4);
+                String grad = resultSet.getString(5);
 
-                student = new Student.Builder()
+                studenti.add(new Student.Builder()
                         .withId(id)
                         .withIme(ime)
                         .withPrezime(prezime)
                         .withIndeks(indeks)
                         .withGrad(grad)
-                        .build();
+                        .build());
             }
 
         } catch (SQLException e) {
@@ -131,12 +132,12 @@ public class StudentDAO {
             e.printStackTrace();
         }
 
-        return student;
+        return studenti;
     }
 
-    public static Student pronadjiPoPrezimenu(Connection conn, String prezime2) {
+    public static List<Student> pronadjiPoPrezimenu(Connection conn, String prezime2) {
         String query = "SELECT student_id, indeks, ime, prezime, grad FROM studenti WHERE prezime LIKE '%" + prezime2 + "%'";
-        Student student = null;
+        List<Student> studenti = new ArrayList<>();
         try (
                 Statement statement = conn.createStatement();
                 ResultSet resultSet = statement.executeQuery(query);
@@ -148,19 +149,19 @@ public class StudentDAO {
                 String prezime = resultSet.getString(4);
                 String grad = resultSet.getString(5);
 
-                student = new Student.Builder()
+                studenti.add(new Student.Builder()
                         .withId(id)
                         .withIme(ime)
                         .withPrezime(prezime)
                         .withIndeks(indeks)
                         .withGrad(grad)
-                        .build();
+                        .build());
             }
         } catch (SQLException e) {
             System.out.println("Nesto je krenulo po zlu!");
             e.printStackTrace();
         }
 
-        return student;
+        return studenti;
     }
 }

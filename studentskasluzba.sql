@@ -44,6 +44,8 @@ use studentskasluzba;
   insert into studenti (indeks, ime, prezime, grad) values ('E7', 'Milica', 'Zivkovic', 'Zlatibor');        -- 7  
   insert into studenti (indeks, ime, prezime, grad) values ('E8', 'Jelena', 'Lazic', 'Kragujevac');        -- 8
   insert into studenti (indeks, ime, prezime, grad) values ('E9', 'Lidija', 'Skrbac', 'Kovin');        -- 9
+  insert into studenti (indeks, ime, prezime, grad) values ('E10', 'Marko', 'Novakovic', 'Kula');
+  insert into studenti (indeks, ime, prezime, grad) values ('E11', 'Milos', 'Popovic', 'Jagodina');
 
 -- NASTAVNICI
 
