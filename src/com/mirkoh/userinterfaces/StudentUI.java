@@ -32,6 +32,9 @@ public class StudentUI {
                 case 4:
                     PronadjiStudentaPoImenu();
                     break;
+                case 5:
+                    PronadjiStudentaPoPrezimenu();
+                    break;
                 default:
                     System.out.println("Nepostojeca opcija!");
                     break;
@@ -40,14 +43,13 @@ public class StudentUI {
     }
 
 
-
-
     private static void ispisiMeni() {
         System.out.println("Rad sa studentima - opcije:");
         System.out.println("\tOpcija broj 1 - Ispis svih studenata");
         System.out.println("\tOpcija broj 2 - Pronadji studenta po ID");
         System.out.println("\tOpcija broj 3 - Pronadji studenta po INDEKSU");
         System.out.println("\tOpcija broj 4 - Pronadji studenta po IMENU");
+        System.out.println("\tOpcija broj 5 - Pronadji studenta po PREZIMENU");
         System.out.println("\tOpcija broj 0 - IZLAZ");
     }
 
@@ -91,6 +93,19 @@ public class StudentUI {
             System.out.println();
         } else {
             System.out.println("Student sa imenom " + ime + " ne postoji.");
+        }
+    }
+
+    private static void PronadjiStudentaPoPrezimenu() {
+        Student student = null;
+        System.out.println("Unesi prezime studenta:");
+        String prezime = ScannerWrapper.ocitajString();
+        student = StudentDAO.pronadjiPoPrezimenu(Application.conn, prezime);
+        if(student != null) {
+            System.out.println(student);
+            System.out.println();
+        } else {
+            System.out.println("Student sa prezimenom " + prezime + " ne postoji.");
         }
     }
 
