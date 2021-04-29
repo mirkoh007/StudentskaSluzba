@@ -187,8 +187,8 @@ public class StudentDAO {
         String obrisi = "DELETE FROM studenti WHERE student_id = " + id;
         try (
                 Statement statement = conn.createStatement();
-                ) {
-            if(statement.executeUpdate(obrisi) == 1) {
+        ) {
+            if (statement.executeUpdate(obrisi) == 1) {
                 obrisano = true;
             }
         } catch (SQLException e) {
@@ -203,13 +203,13 @@ public class StudentDAO {
         String izmeni = "UPDATE studenti SET indeks=?, ime=?, prezime=?, grad=? WHERE student_id=?";
         try (
                 PreparedStatement statement = conn.prepareStatement(izmeni);
-                ) {
+        ) {
             statement.setString(1, stariStudent.getIndeks());
             statement.setString(2, stariStudent.getIme());
             statement.setString(3, stariStudent.getPrezime());
             statement.setString(4, stariStudent.getGrad());
             statement.setInt(5, stariStudent.getId());
-            if(statement.executeUpdate() == 1) {
+            if (statement.executeUpdate() == 1) {
                 uspesnaIzmena = true;
             }
 

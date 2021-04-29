@@ -157,11 +157,11 @@ public class StudentUI {
 
     public static void izmenaPodatakaOStudentu() {
         Student stariStudent = pronadjiStudenta();
-        if(stariStudent != null) {
+        if (stariStudent != null) {
             System.out.println("Unesi novi indesk u formatu E1, M1");
             String indeks = ScannerWrapper.ocitajString().toUpperCase();
             Student postoji = pronadjiStudenta(indeks);
-            if(postoji == null){
+            if (postoji == null) {
                 System.out.println("Student sa datim indkeskom ne postoji");
             } else {
                 stariStudent.setIndeks(indeks);
@@ -189,10 +189,10 @@ public class StudentUI {
         boolean obrisan = false;
         Student student = pronadjiStudenta();
         if (student != null) {
-           obrisan = StudentDAO.obrisiStudenta(Application.conn, student.getId());
+            obrisan = StudentDAO.obrisiStudenta(Application.conn, student.getId());
         }
 
-        if(obrisan) {
+        if (obrisan) {
             System.out.println("Student je uspesno obrisan!");
         } else {
             System.out.println("Neuspesno brisanje studenta!");
