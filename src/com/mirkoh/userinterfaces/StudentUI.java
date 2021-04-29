@@ -52,7 +52,7 @@ public class StudentUI {
     }
 
 
-    private static void ispisiMeni() {
+    public static void ispisiMeni() {
         System.out.println("\nRad sa studentima - opcije:");
         System.out.println("\tOpcija broj 1 - Ispis svih Studenata");
         System.out.println("\tOpcija broj 2 - Pronadji studenta po ID");
@@ -65,12 +65,12 @@ public class StudentUI {
         System.out.println("\tOpcija broj 0 - IZLAZ");
     }
 
-    private static void ispisiSveStudente() {
+    public static void ispisiSveStudente() {
         List<Student> sviStudenti = StudentDAO.pronadjiSveStudente(Application.conn);
         sviStudenti.forEach(System.out::println);
     }
 
-    private static void pronadjiStudentaPoID() {
+    public static void pronadjiStudentaPoID() {
         Student student;
         System.out.println("Unesi ID studenta: ");
         int id = ScannerWrapper.ocitajCeoBroj();
@@ -82,7 +82,7 @@ public class StudentUI {
         }
     }
 
-    private static void pronadjiStudentaPoIndeksu() {
+    public static void pronadjiStudentaPoIndeksu() {
         Student student;
         System.out.println("Unesi INDEKS studenta:");
         String indeks = ScannerWrapper.ocitajString();
@@ -95,7 +95,7 @@ public class StudentUI {
         }
     }
 
-    private static void pronadjiStudentaPoImenu() {
+    public static void pronadjiStudentaPoImenu() {
         List<Student> studenti;
         System.out.println("Unesi ime studenta:");
         String ime = ScannerWrapper.ocitajString();
@@ -107,7 +107,7 @@ public class StudentUI {
         }
     }
 
-    private static void pronadjiStudentaPoPrezimenu() {
+    public static void pronadjiStudentaPoPrezimenu() {
         List<Student> studenti;
         System.out.println("Unesi prezime studenta:");
         String prezime = ScannerWrapper.ocitajString();
@@ -119,7 +119,7 @@ public class StudentUI {
         }
     }
 
-    private static void unosNovogStudenta() {
+    public static void unosNovogStudenta() {
         System.out.println("Unesite indeks u formatu: E1, E2, M1, M2");
         System.out.println("Unesi indeks:");
         String indeks = ScannerWrapper.ocitajString();

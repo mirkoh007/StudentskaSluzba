@@ -16,7 +16,6 @@ public class ScannerWrapper {
                 ocitan = true;
             } catch (Exception e) {
                 System.out.println("GRESKA - Pogresno unesena vrednost za ceo broj, pokusajte ponovo:");
-                e.printStackTrace();
                 scanner.nextLine();
             }
         }
