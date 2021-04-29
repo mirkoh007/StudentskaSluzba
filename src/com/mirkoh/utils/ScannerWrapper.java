@@ -1,6 +1,5 @@
 package com.mirkoh.utils;
 
-import java.util.Locale;
 import java.util.Scanner;
 
 public class ScannerWrapper {
@@ -15,7 +14,7 @@ public class ScannerWrapper {
                 ceoBroj = scanner.nextInt();
                 scanner.nextLine();
                 ocitan = true;
-            }catch (Exception e) {
+            } catch (Exception e) {
                 System.out.println("GRESKA - Pogresno unesena vrednost za ceo broj, pokusajte ponovo:");
                 e.printStackTrace();
                 scanner.nextLine();
@@ -31,4 +30,5 @@ public class ScannerWrapper {
         }
         return string;
     }
+
 }
