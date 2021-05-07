@@ -100,7 +100,7 @@ public class StudentUI {
         System.out.println("Unesi ime studenta:");
         String ime = ScannerWrapper.ocitajString();
         studenti = StudentDAO.pronadjiStudentaPoImenu(Application.conn, ime);
-        if (studenti != null) {
+        if (studenti.size() != 0) {
             studenti.forEach(System.out::println);
         } else {
             System.out.println("Student(i) sa imenom " + ime + " ne postoji(e).");
@@ -112,7 +112,7 @@ public class StudentUI {
         System.out.println("Unesi prezime studenta:");
         String prezime = ScannerWrapper.ocitajString();
         studenti = StudentDAO.pronadjiPoPrezimenu(Application.conn, prezime);
-        if (studenti != null) {
+        if (studenti.size() != 0) {
             studenti.forEach(System.out::println);
         } else {
             System.out.println("Student(i) sa prezimenom " + prezime + " ne postoji(e).");
@@ -145,11 +145,11 @@ public class StudentUI {
                 .withGrad(grad)
                 .build();
 
-        boolean dodatStudent = StudentDAO.dodajStudenta(Application.conn, noviStudent);
+        boolean dodatStudent = StudentDAO.dodajNovogStudenta(Application.conn, noviStudent);
         if (dodatStudent) {
             System.out.println("Student uspesno dodat u bazu.");
         } else {
-            System.out.println("Doslo je do greske prilikom dodavanja nogo studenta.");
+            System.out.println("Doslo je do greske prilikom dodavanja novog studenta.");
             System.out.println("Pokusajte ponovo.");
         }
 
@@ -161,8 +161,8 @@ public class StudentUI {
             System.out.println("Unesi novi indesk u formatu E1, M1");
             String indeks = ScannerWrapper.ocitajString().toUpperCase();
             Student postoji = pronadjiStudenta(indeks);
-            if (postoji == null) {
-                System.out.println("Student sa datim indkeskom ne postoji");
+            if (postoji != null) {
+                System.out.println("Student sa datim indkeskom vec postoji");
             } else {
                 stariStudent.setIndeks(indeks);
                 System.out.println("Unesi ime studenta:");
@@ -217,6 +217,5 @@ public class StudentUI {
         Student pronadjenStudent = StudentDAO.pronadjiStudentaPoIndeksu(Application.conn, indeks);
         return pronadjenStudent;
     }
-
 
 }
