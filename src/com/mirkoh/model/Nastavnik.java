@@ -5,6 +5,7 @@ public class Nastavnik extends Osoba {
     private String zvanje;
 
     private Nastavnik() {
+        super();
     }
 
     public static class Builder {

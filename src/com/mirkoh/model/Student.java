@@ -6,6 +6,7 @@ public class Student extends Osoba {
     private String indeks;
 
     private Student() {
+        super();
     }
 
     public static class Builder {
