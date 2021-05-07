@@ -1,6 +1,7 @@
 package com.mirkoh;
 
 import com.mirkoh.userinterfaces.NastavnikUI;
+import com.mirkoh.userinterfaces.PredmetUI;
 import com.mirkoh.userinterfaces.StudentUI;
 import com.mirkoh.utils.ScannerWrapper;
 
@@ -45,6 +46,10 @@ public class Application {
                     NastavnikUI.meni();
                     break;
 
+                case 3:
+                    PredmetUI.meni();
+                    break;
+
                 default:
                     System.out.println("Nepostojeca komanda");
                     break;
@@ -58,6 +63,7 @@ public class Application {
         System.out.println("Studentska sluzba - osnovne opcije:");
         System.out.println("\tOpcija broj 1 - rad sa studentima");
         System.out.println("\tOpcija broj 2 - rad sa nastavicima");
+        System.out.println("\tOpcija broj 3 - rad sa predmetima");
         System.out.println("\t.....................");
         System.out.println("\tOpcija broj 0 - IZLAZ IZ PROGRAMA");
     }
