@@ -1,13 +1,13 @@
 package com.mirkoh.model;
 
-public class Student {
-    private int id;
-    private String ime;
-    private String prezime;
+public class Student extends Osoba {
+
     private String grad;
     private String indeks;
 
-    private Student() {}
+    private Student() {
+        super();
+    }
 
     public static class Builder {
         private int id;
@@ -16,7 +16,8 @@ public class Student {
         private String grad;
         private String indeks;
 
-        public Builder() {}
+        public Builder() {
+        }
 
         public Builder withId(int id) {
             this.id = id;
@@ -64,30 +65,6 @@ public class Student {
                 ", prezime='" + prezime + '\'' +
                 ", grad='" + grad + '\'' +
                 '}';
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getIme() {
-        return ime;
-    }
-
-    public void setIme(String ime) {
-        this.ime = ime;
-    }
-
-    public String getPrezime() {
-        return prezime;
-    }
-
-    public void setPrezime(String prezime) {
-        this.prezime = prezime;
     }
 
     public String getGrad() {

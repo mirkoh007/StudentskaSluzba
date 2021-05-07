@@ -19,20 +19,8 @@ public class NastavnikDAO {
                 Statement statement = conn.createStatement();
                 ResultSet resultSet = statement.executeQuery(query)
         ) {
-            while (resultSet.next()) {
-                int id = resultSet.getInt(1);
-                String ime = resultSet.getString(2);
-                String prezime = resultSet.getString(3);
-                String zvanje = resultSet.getString(4);
+            kreirajNastavike(sviNastavnici, resultSet);
 
-                Nastavnik nastavnik = new Nastavnik.Builder()
-                        .withId(id)
-                        .withIme(ime)
-                        .withPrezime(prezime)
-                        .withZvanje(zvanje)
-                        .build();
-                sviNastavnici.add(nastavnik);
-            }
         } catch (SQLException e) {
             System.out.println("Nesto je krenulo po zlu");
             e.printStackTrace();
@@ -60,7 +48,6 @@ public class NastavnikDAO {
                         .withPrezime(prezime)
                         .withZvanje(zvanje)
                         .build();
-
             }
         } catch (SQLException e) {
             System.out.println("Nesto je krenulo po zlu.");
@@ -78,7 +65,7 @@ public class NastavnikDAO {
                 Statement statement = conn.createStatement();
                 ResultSet resultSet = statement.executeQuery(pronadjiNastavnike)
         ) {
-            kreirajNastavika(nadjeniNastavnici, resultSet);
+            kreirajNastavike(nadjeniNastavnici, resultSet);
 
         } catch (SQLException e) {
             System.out.println("Nesto je krenulo po zlu.");
@@ -96,7 +83,7 @@ public class NastavnikDAO {
                 Statement statement = conn.createStatement();
                 ResultSet resultSet = statement.executeQuery(pronadjiNastavnike)
         ) {
-            kreirajNastavika(nadjeniNastavnici, resultSet);
+            kreirajNastavike(nadjeniNastavnici, resultSet);
 
         } catch (SQLException e) {
             System.out.println("Nesto je krenulo po zlu");
@@ -113,8 +100,7 @@ public class NastavnikDAO {
                 Statement statement = conn.createStatement();
                 ResultSet resultSet = statement.executeQuery(pronadjiNastavnike)
         ) {
-            kreirajNastavika(nadjeniNastavnici, resultSet);
-
+            kreirajNastavike(nadjeniNastavnici, resultSet);
 
         } catch (SQLException e) {
             System.out.println("Nesto je krenulo po zlu");
@@ -124,7 +110,7 @@ public class NastavnikDAO {
         return nadjeniNastavnici;
     }
 
-    private static void kreirajNastavika(List<Nastavnik> nadjeniNastavnici, ResultSet resultSet) throws SQLException {
+    private static void kreirajNastavike(List<Nastavnik> nadjeniNastavnici, ResultSet resultSet) throws SQLException {
         while (resultSet.next()) {
             int id = resultSet.getInt(1);
             String ime = resultSet.getString(2);

@@ -23,13 +23,7 @@ public class StudentDAO {
                 String prezime = resultSet.getString(4);
                 String grad = resultSet.getString(5);
 
-                Student student = new Student.Builder()
-                        .withId(id)
-                        .withIndeks(indeks)
-                        .withIme(ime)
-                        .withPrezime(prezime)
-                        .withGrad(grad)
-                        .build();
+                Student student = napraviStudenta(id, ime, prezime, grad, indeks.toUpperCase());
 
                 sviStudenti.add(student);
             }
@@ -85,13 +79,7 @@ public class StudentDAO {
                 String prezime = resultSet.getString(3);
                 String grad = resultSet.getString(4);
 
-                student = new Student.Builder()
-                        .withId(id)
-                        .withIme(ime)
-                        .withPrezime(prezime)
-                        .withIndeks(indeks)
-                        .withGrad(grad)
-                        .build();
+                student = napraviStudenta(id, ime, prezime, grad, indeks.toUpperCase());
             }
 
         } catch (SQLException e) {
@@ -103,27 +91,22 @@ public class StudentDAO {
 
     public static List<Student> pronadjiStudentaPoImenu(Connection conn, String ime1) {
         String query = "SELECT student_id, indeks, ime, prezime, grad FROM studenti WHERE ime LIKE '%" + ime1 + "%'";
+
+        return pretragaStudenta(conn, query);
+    }
+
+    public static List<Student> pronadjiPoPrezimenu(Connection conn, String prezime2) {
+        String query = "SELECT student_id, indeks, ime, prezime, grad FROM studenti WHERE prezime LIKE '%" + prezime2 + "%'";
+        return pretragaStudenta(conn, query);
+    }
+
+    private static List<Student> pretragaStudenta(Connection conn, String query) {
         List<Student> studenti = new ArrayList<>();
         try (
                 Statement statement = conn.createStatement();
                 ResultSet resultSet = statement.executeQuery(query)
         ) {
-            while (resultSet.next()) {
-                int id = resultSet.getInt(1);
-                String indeks = resultSet.getString(2);
-                String ime = resultSet.getString(3);
-                String prezime = resultSet.getNString(4);
-                String grad = resultSet.getString(5);
-
-                studenti.add(new Student.Builder()
-                        .withId(id)
-                        .withIme(ime)
-                        .withPrezime(prezime)
-                        .withIndeks(indeks)
-                        .withGrad(grad)
-                        .build());
-            }
-
+            dodajUListu(studenti, resultSet);
         } catch (SQLException e) {
             System.out.println("Nesto je krenulo po zlu!");
             e.printStackTrace();
@@ -132,37 +115,29 @@ public class StudentDAO {
         return studenti;
     }
 
-    public static List<Student> pronadjiPoPrezimenu(Connection conn, String prezime2) {
-        String query = "SELECT student_id, indeks, ime, prezime, grad FROM studenti WHERE prezime LIKE '%" + prezime2 + "%'";
-        List<Student> studenti = new ArrayList<>();
-        try (
-                Statement statement = conn.createStatement();
-                ResultSet resultSet = statement.executeQuery(query);
-        ) {
-            while (resultSet.next()) {
-                int id = resultSet.getInt(1);
-                String indeks = resultSet.getString(2);
-                String ime = resultSet.getString(3);
-                String prezime = resultSet.getString(4);
-                String grad = resultSet.getString(5);
+    private static void dodajUListu(List<Student> studenti, ResultSet resultSet) throws SQLException {
+        while (resultSet.next()) {
+            int id = resultSet.getInt(1);
+            String indeks = resultSet.getString(2);
+            String ime = resultSet.getString(3);
+            String prezime = resultSet.getString(4);
+            String grad = resultSet.getString(5);
 
-                studenti.add(new Student.Builder()
-                        .withId(id)
-                        .withIme(ime)
-                        .withPrezime(prezime)
-                        .withIndeks(indeks)
-                        .withGrad(grad)
-                        .build());
-            }
-        } catch (SQLException e) {
-            System.out.println("Nesto je krenulo po zlu!");
-            e.printStackTrace();
+            studenti.add(napraviStudenta(id, ime, prezime, grad, indeks));
         }
-
-        return studenti;
     }
 
-    public static boolean dodajStudenta(Connection conn, Student student) {
+    private static Student napraviStudenta(int id, String ime, String prezime, String grad, String s) {
+        return new Student.Builder()
+                .withId(id)
+                .withIme(ime)
+                .withPrezime(prezime)
+                .withIndeks(s)
+                .withGrad(grad)
+                .build();
+    }
+
+    public static boolean dodajNovogStudenta(Connection conn, Student student) {
         boolean updated = false;
         String update = "INSERT INTO studenti (indeks, ime, prezime, grad) values (?, ?, ?, ?)";
         try {

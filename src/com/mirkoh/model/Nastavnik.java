@@ -1,13 +1,11 @@
 package com.mirkoh.model;
 
-public class Nastavnik {
+public class Nastavnik extends Osoba {
 
-    private int id;
-    private String ime;
-    private String prezime;
     private String zvanje;
 
     private Nastavnik() {
+        super();
     }
 
     public static class Builder {
@@ -17,12 +15,14 @@ public class Nastavnik {
         private String prezime;
         private String zvanje;
 
-        public Builder() {}
+        public Builder() {
+        }
 
         public Builder withId(int id) {
             this.id = id;
             return this;
         }
+
         public Builder withIme(String ime) {
             this.ime = ime;
             return this;
@@ -57,30 +57,6 @@ public class Nastavnik {
                 ", prezime='" + prezime + '\'' +
                 ", zvanje='" + zvanje + '\'' +
                 '}';
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getIme() {
-        return ime;
-    }
-
-    public void setIme(String ime) {
-        this.ime = ime;
-    }
-
-    public String getPrezime() {
-        return prezime;
-    }
-
-    public void setPrezime(String prezime) {
-        this.prezime = prezime;
     }
 
     public String getZvanje() {
