@@ -1,6 +1,11 @@
 package com.mirkoh.userinterfaces;
 
+import com.mirkoh.Application;
+import com.mirkoh.dao.PredmetDAO;
+import com.mirkoh.model.Predmet;
 import com.mirkoh.utils.ScannerWrapper;
+
+import java.util.List;
 
 public class PredmetUI {
 
@@ -27,6 +32,7 @@ public class PredmetUI {
     }
 
    public static void ispisiSvePredmete() {
-       System.out.println("Bice uradjeno");
+       List<Predmet> sviPredmeti = PredmetDAO.pronadjiSvePredmete(Application.conn);
+       sviPredmeti.forEach(System.out::println);
    }
 }
