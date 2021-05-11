@@ -36,4 +36,30 @@ public class PredmetDAO {
 
         return sviPredmeti;
     }
+
+    public static List<Predmet> pronadjiPredmetPoImenu(Connection conn, String imePredmeta) {
+        List<Predmet> predmeti = new ArrayList<>();
+        String query = "SELECT predmet_id, naziv FROM predmeti WHERE naziv LIKE '"
+                +imePredmeta + "%'";
+        try (
+                Statement statement = conn.createStatement();
+                ResultSet resultSet = statement.executeQuery(query)
+                ) {
+            while (resultSet.next()) {
+                int id = resultSet.getInt(1);
+                String naziv = resultSet.getString(2);
+
+                predmeti.add(new Predmet.Builder()
+                        .withId(id)
+                        .withNazivPredmeta(naziv)
+                        .build());
+            }
+
+        } catch (SQLException e) {
+            System.out.printf("Nesto je krenulo po zlu!");
+            e.printStackTrace();
+        }
+
+        return predmeti;
+    }
 }

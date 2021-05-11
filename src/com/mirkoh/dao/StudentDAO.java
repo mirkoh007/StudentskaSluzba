@@ -90,13 +90,13 @@ public class StudentDAO {
     }
 
     public static List<Student> pronadjiStudentaPoImenu(Connection conn, String ime1) {
-        String query = "SELECT student_id, indeks, ime, prezime, grad FROM studenti WHERE ime LIKE '%" + ime1 + "%'";
+        String query = "SELECT student_id, indeks, ime, prezime, grad FROM studenti WHERE ime LIKE '" + ime1 + "%'";
 
         return pretragaStudenta(conn, query);
     }
 
     public static List<Student> pronadjiPoPrezimenu(Connection conn, String prezime2) {
-        String query = "SELECT student_id, indeks, ime, prezime, grad FROM studenti WHERE prezime LIKE '%" + prezime2 + "%'";
+        String query = "SELECT student_id, indeks, ime, prezime, grad FROM studenti WHERE prezime LIKE '" + prezime2 + "%'";
         return pretragaStudenta(conn, query);
     }
 

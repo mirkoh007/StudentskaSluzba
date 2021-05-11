@@ -20,6 +20,14 @@ public class PredmetUI {
                 case 1:
                     ispisiSvePredmete();
                     break;
+
+                case 2:
+                    pronadjiPredmetPoImenu();
+                    break;
+
+                default:
+                    System.out.println("Nepostojeca opcija!");
+                    break;
             }
         }
     }
@@ -27,12 +35,26 @@ public class PredmetUI {
     public static void ispisiMeni() {
         System.out.println("Rad sa predmetima - opcije:");
         System.out.println("\tOpcija broj 1 - Ispis svih predmeta");
+        System.out.println("\tOpcija broj 2 - Ispisi predmet(e) po nazivu");
         System.out.println("\tOpcija broj 0 - IZLAZ");
 
     }
 
-   public static void ispisiSvePredmete() {
-       List<Predmet> sviPredmeti = PredmetDAO.pronadjiSvePredmete(Application.conn);
-       sviPredmeti.forEach(System.out::println);
-   }
+    public static void ispisiSvePredmete() {
+        List<Predmet> sviPredmeti = PredmetDAO.pronadjiSvePredmete(Application.conn);
+        sviPredmeti.forEach(System.out::println);
+    }
+
+    public static void pronadjiPredmetPoImenu() {
+        List<Predmet> predmeti;
+        System.out.printf("Unesi ime predmeta:");
+        String nazivPredmeta = ScannerWrapper.ocitajString();
+        predmeti = PredmetDAO.pronadjiPredmetPoImenu(Application.conn,nazivPredmeta);
+
+        if(predmeti.isEmpty()) {
+            System.out.println("Ne postoji(e) predmeti za unesenim nazivom");
+        } else {
+            predmeti.forEach(System.out::println);
+        }
+    }
 }

@@ -60,7 +60,7 @@ public class NastavnikDAO {
     public static List<Nastavnik> pronadjiNastavnikaPoImenu(Connection conn, String ime2) {
         List<Nastavnik> nadjeniNastavnici = new ArrayList<>();
         String pronadjiNastavnike = "SELECT nastavnik_id, ime, prezime, zvanje" +
-                " FROM nastavnici WHERE ime LIKE '%" + ime2 + "%'";
+                " FROM nastavnici WHERE ime LIKE '" + ime2 + "%'";
         try (
                 Statement statement = conn.createStatement();
                 ResultSet resultSet = statement.executeQuery(pronadjiNastavnike)
@@ -77,7 +77,7 @@ public class NastavnikDAO {
     public static List<Nastavnik> pronadjiNastavnikaPoPrezimenu(Connection conn, String prezime2) {
         List<Nastavnik> nadjeniNastavnici = new ArrayList<>();
         String pronadjiNastavnike = "SELECT nastavnik_id, ime, prezime, zvanje " +
-                "FROM nastavnici WHERE prezime LIKE '%" + prezime2 + "%'";
+                "FROM nastavnici WHERE prezime LIKE '" + prezime2 + "%'";
 
         try (
                 Statement statement = conn.createStatement();
