@@ -139,10 +139,9 @@ public class StudentDAO {
 
     public static boolean dodajNovogStudenta(Connection conn, Student student) {
         boolean updated = false;
-        String update = "INSERT INTO studenti (indeks, ime, prezime, grad) values (?, ?, ?, ?)";
+        String dodaj = "INSERT INTO studenti (indeks, ime, prezime, grad) values (?, ?, ?, ?)";
         try {
-
-            PreparedStatement statement = conn.prepareStatement(update);
+            PreparedStatement statement = conn.prepareStatement(dodaj);
             statement.setString(1, student.getIndeks());
             statement.setString(2, student.getIme());
             statement.setString(3, student.getPrezime());
@@ -161,7 +160,7 @@ public class StudentDAO {
         boolean obrisano = false;
         String obrisi = "DELETE FROM studenti WHERE student_id = " + id;
         try (
-                Statement statement = conn.createStatement();
+                Statement statement = conn.createStatement()
         ) {
             if (statement.executeUpdate(obrisi) == 1) {
                 obrisano = true;

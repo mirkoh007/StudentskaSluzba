@@ -30,7 +30,7 @@ USE studentskasluzba;
     
     CREATE TABLE predmeti (
     predmet_id integer AUTO_INCREMENT PRIMARY KEY,
-    naziv varchar(20)
+    naziv varchar(128)
     );
 	
     

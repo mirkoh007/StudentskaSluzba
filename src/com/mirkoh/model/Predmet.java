@@ -47,8 +47,7 @@ public class Predmet {
     public String toString() {
         return "Predmet{" +
                 "id=" + id +
-                ", nazivPredmeta='" + nazivPredmeta + //'\'' +
-//                ", studenti=" + studenti +
+                ", nazivPredmeta='" + nazivPredmeta + '\'' +
                 '}';
     }
 
