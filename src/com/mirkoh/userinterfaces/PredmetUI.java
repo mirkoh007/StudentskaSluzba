@@ -93,6 +93,7 @@ public class PredmetUI {
         while (pronadjiPredmete(nazivNovogPredmeta).size() != 0) {
             System.out.println("Greska! Predmet sa nazivom: " + nazivNovogPredmeta +
                      " vec postoji u evidenciji.");
+            System.out.println("Unesite ime predmeta:");
             nazivNovogPredmeta = ScannerWrapper.ocitajString();
         }
 

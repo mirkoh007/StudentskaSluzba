@@ -71,10 +71,7 @@ public class PredmetDAO {
                 int id = resultSet.getInt(1);
                 String naziv = resultSet.getString(2);
 
-                predmet = new Predmet.Builder()
-                        .withId(id)
-                        .withNazivPredmeta(naziv)
-                        .build();
+                predmet = kreirajPredmet(id, naziv);
             }
 
         }catch (SQLException e) {
@@ -96,10 +93,7 @@ public class PredmetDAO {
             if (resultSet.next()) {
                 String naziv = resultSet.getString(1);
 
-                predmet = new Predmet.Builder()
-                        .withId(idPredmeta)
-                        .withNazivPredmeta(naziv)
-                        .build();
+                predmet = kreirajPredmet(idPredmeta, naziv);
             }
 
         } catch (SQLException e) {
@@ -107,6 +101,15 @@ public class PredmetDAO {
             e.printStackTrace();
         }
 
+        return predmet;
+    }
+
+    private static Predmet kreirajPredmet(int id, String naziv) {
+        Predmet predmet;
+        predmet = new Predmet.Builder()
+                .withId(id)
+                .withNazivPredmeta(naziv)
+                .build();
         return predmet;
     }
 
