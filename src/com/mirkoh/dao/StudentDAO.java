@@ -90,13 +90,13 @@ public class StudentDAO {
     }
 
     public static List<Student> pronadjiStudentaPoImenu(Connection conn, String ime1) {
-        String query = "SELECT student_id, indeks, ime, prezime, grad FROM studenti WHERE ime LIKE '%" + ime1 + "%'";
+        String query = "SELECT student_id, indeks, ime, prezime, grad FROM studenti WHERE ime LIKE '" + ime1 + "%'";
 
         return pretragaStudenta(conn, query);
     }
 
     public static List<Student> pronadjiPoPrezimenu(Connection conn, String prezime2) {
-        String query = "SELECT student_id, indeks, ime, prezime, grad FROM studenti WHERE prezime LIKE '%" + prezime2 + "%'";
+        String query = "SELECT student_id, indeks, ime, prezime, grad FROM studenti WHERE prezime LIKE '" + prezime2 + "%'";
         return pretragaStudenta(conn, query);
     }
 
@@ -139,10 +139,9 @@ public class StudentDAO {
 
     public static boolean dodajNovogStudenta(Connection conn, Student student) {
         boolean updated = false;
-        String update = "INSERT INTO studenti (indeks, ime, prezime, grad) values (?, ?, ?, ?)";
+        String dodaj = "INSERT INTO studenti (indeks, ime, prezime, grad) values (?, ?, ?, ?)";
         try {
-
-            PreparedStatement statement = conn.prepareStatement(update);
+            PreparedStatement statement = conn.prepareStatement(dodaj);
             statement.setString(1, student.getIndeks());
             statement.setString(2, student.getIme());
             statement.setString(3, student.getPrezime());
@@ -161,7 +160,7 @@ public class StudentDAO {
         boolean obrisano = false;
         String obrisi = "DELETE FROM studenti WHERE student_id = " + id;
         try (
-                Statement statement = conn.createStatement();
+                Statement statement = conn.createStatement()
         ) {
             if (statement.executeUpdate(obrisi) == 1) {
                 obrisano = true;
