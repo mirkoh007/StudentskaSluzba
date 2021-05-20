@@ -1,6 +1,8 @@
 package com.mirkoh.dao;
 
+import com.mirkoh.Application;
 import com.mirkoh.model.Student;
+import com.mirkoh.utils.ScannerWrapper;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -193,5 +195,25 @@ public class StudentDAO {
         }
 
         return uspesnaIzmena;
+    }
+
+    public static Student pronadjiStudenta() {
+        Student nadjenStudent;
+        System.out.println("Unesite indeks studenta u formatu E1, M2:");
+        String indeks = ScannerWrapper.ocitajString().toUpperCase();
+
+        nadjenStudent = pronadjiStudenta(indeks);
+
+        if (nadjenStudent == null) {
+            System.out.println("Student sa indekskom " + indeks +
+                    " ne postoji u evidenciji!");
+        }
+
+        return nadjenStudent;
+    }
+
+    public static Student pronadjiStudenta(String indeks) {
+        Student pronadjenStudent = pronadjiStudentaPoIndeksu(Application.conn, indeks);
+        return pronadjenStudent;
     }
 }

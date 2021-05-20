@@ -82,7 +82,7 @@ public class PredmetDAO {
         return predmet;
     }
 
-    public static Predmet pronadjiPredmetPiID(Connection conn, int idPredmeta) {
+    public static Predmet pronadjiPredmetPoID(Connection conn, int idPredmeta) {
         Predmet predmet = null;
         String query = "SELECT naziv FROM predmeti WHERE predmet_id = " + idPredmeta;
 

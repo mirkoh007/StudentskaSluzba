@@ -17,6 +17,10 @@ public class PredmetUI {
             odluka = ScannerWrapper.ocitajCeoBroj();
 
             switch (odluka) {
+                case 0:
+                    System.out.println("Izlaz");
+                    break;
+
                 case 1:
                     ispisiSvePredmete();
                     break;
@@ -65,7 +69,7 @@ public class PredmetUI {
         Predmet predmet;
         System.out.println("Unesi ID predmeta:");
         int idPredmeta = ScannerWrapper.ocitajCeoBroj();
-        predmet = PredmetDAO.pronadjiPredmetPiID(Application.conn, idPredmeta);
+        predmet = PredmetDAO.pronadjiPredmetPoID(Application.conn, idPredmeta);
 
         if (predmet != null) {
             System.out.println(predmet);

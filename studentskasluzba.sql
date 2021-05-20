@@ -8,31 +8,45 @@ USE studentskasluzba;
 	DROP TABLE IF EXISTS studenti;
 	DROP TABLE IF EXISTS nastavnici;
     DROP TABLE IF EXISTS predmeti;
+    DROP TABLE IF EXISTS pohadja;
 	
 -- KREIRANJE TABELA
 
 	CREATE TABLE studenti (
-	student_id  integer AUTO_INCREMENT,
-	indeks varchar(20) NOT NULL,
-	ime  varchar(20) NOT NULL,
-	prezime  varchar(20) NOT NULL,
-	grad varchar(20) NOT NULL,
-	primary key(student_id) 
+		student_id  integer AUTO_INCREMENT,
+		indeks varchar(20) NOT NULL,
+		ime  varchar(20) NOT NULL,
+		prezime  varchar(20) NOT NULL,
+		grad varchar(20) NOT NULL,
+		primary key(student_id) 
 	);
 	
 	CREATE TABLE nastavnici (
-	nastavnik_id  integer AUTO_INCREMENT,
-	ime  varchar(20) NOT NULL,
-	prezime  varchar(20) NOT NULL,
-	zvanje varchar(20) NOT NULL,
-	primary key(nastavnik_id)
+		nastavnik_id  integer AUTO_INCREMENT,
+		ime  varchar(20) NOT NULL,
+		prezime  varchar(20) NOT NULL,
+		zvanje varchar(20) NOT NULL,
+		primary key(nastavnik_id)
 	);
     
     CREATE TABLE predmeti (
-    predmet_id integer AUTO_INCREMENT PRIMARY KEY,
-    naziv varchar(128)
+		predmet_id integer AUTO_INCREMENT PRIMARY KEY,
+		naziv varchar(128)
     );
 	
+    CREATE TABLE pohadja (
+		student_id integer NOT NULL,
+        predmet_id integer NOT NULL,
+        PRIMARY KEY(student_id, predmet_id),
+	
+	FOREIGN KEY (student_id)
+	                        REFERENCES studenti(student_id)
+	                        ON DELETE CASCADE,
+	
+	FOREIGN KEY (predmet_id)
+	                        REFERENCES predmeti(predmet_id)
+	                        ON DELETE CASCADE
+    );
     
 -- UBACIVANJE PODATAKA
 
@@ -73,7 +87,19 @@ USE studentskasluzba;
   insert into predmeti (naziv) values ('MIRMAS');               -- 8 
   insert into predmeti (naziv) values ('Fizika');               -- 9
   insert into predmeti (naziv) values ('TEK');                  -- 10
-	
+  
+  -- POHADJA
+  
+  insert into pohadja values (1, 1);
+  insert into pohadja values (1, 2);
+  insert into pohadja values (2, 1),(2,3);
+  insert into pohadja values (3, 1);
+  insert into pohadja values (4, 1),(4, 3),(4, 5);
+  insert into pohadja values (5, 1),(5, 3),(5, 5),(5, 7),(5, 10);
+  insert into pohadja values (6, 1),(6, 2),(6, 3),(6, 6),(6, 9);
+  insert into pohadja values (7, 4),(7, 5),(7, 6),(7, 7),(7, 8),(7, 10);
+  insert into pohadja values (8, 4),(8, 5),(8, 6),(8, 10);
+  insert into pohadja values (9, 7),(9, 8),(9, 9),(9, 10);	
 	
 	
   

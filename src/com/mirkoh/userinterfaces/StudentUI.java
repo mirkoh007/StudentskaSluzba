@@ -124,7 +124,7 @@ public class StudentUI {
         System.out.println("Unesi indeks:");
         String indeks = ScannerWrapper.ocitajString();
         indeks = indeks.toUpperCase();
-        while (pronadjiStudenta(indeks) != null) {
+        while (StudentDAO.pronadjiStudenta(indeks) != null) {
             System.out.println("Greska! Student sa indeksom " + indeks +
                     " vec postoji u evidenciji!");
             indeks = ScannerWrapper.ocitajString();
@@ -156,11 +156,12 @@ public class StudentUI {
     }
 
     public static void izmenaPodatakaOStudentu() {
-        Student stariStudent = pronadjiStudenta();
+        Student stariStudent = StudentDAO.pronadjiStudenta();
         if (stariStudent != null) {
+            System.out.println(stariStudent);
             System.out.println("Unesi novi indesk u formatu E1, M1");
             String indeks = ScannerWrapper.ocitajString().toUpperCase();
-            Student postoji = pronadjiStudenta(indeks);
+            Student postoji = StudentDAO.pronadjiStudenta(indeks);
             if (postoji != null) {
                 System.out.println("Student sa datim indkeskom vec postoji");
             } else {
@@ -187,7 +188,7 @@ public class StudentUI {
 
     public static void brisanjeStudenta() {
         boolean obrisan = false;
-        Student student = pronadjiStudenta();
+        Student student = StudentDAO.pronadjiStudenta();
         if (student != null) {
             obrisan = StudentDAO.obrisiStudenta(Application.conn, student.getId());
         }
@@ -199,23 +200,23 @@ public class StudentUI {
         }
     }
 
-    public static Student pronadjiStudenta() {
-        Student nadjenStudent;
-        System.out.println("Unesite indeks studenta u formatu E1, M2:");
-        String indeks = ScannerWrapper.ocitajString().toUpperCase();
-
-        nadjenStudent = pronadjiStudenta(indeks);
-        if (nadjenStudent == null) {
-            System.out.println("Greska! Student sa indekskom " + indeks +
-                    " ne postoji u evidenciji!");
-        }
-
-        return nadjenStudent;
-    }
-
-    public static Student pronadjiStudenta(String indeks) {
-        Student pronadjenStudent = StudentDAO.pronadjiStudentaPoIndeksu(Application.conn, indeks);
-        return pronadjenStudent;
-    }
+//    public static Student pronadjiStudenta() {
+//        Student nadjenStudent;
+//        System.out.println("Unesite indeks studenta u formatu E1, M2:");
+//        String indeks = ScannerWrapper.ocitajString().toUpperCase();
+//
+//        nadjenStudent = pronadjiStudenta(indeks);
+//        if (nadjenStudent == null) {
+//            System.out.println("Greska! Student sa indekskom " + indeks +
+//                    " ne postoji u evidenciji!");
+//        }
+//
+//        return nadjenStudent;
+//    }
+//
+//    public static Student pronadjiStudenta(String indeks) {
+//        Student pronadjenStudent = StudentDAO.pronadjiStudentaPoIndeksu(Application.conn, indeks);
+//        return pronadjenStudent;
+//    }
 
 }
