@@ -200,23 +200,23 @@ public class StudentUI {
         }
     }
 
-//    public static Student pronadjiStudenta() {
-//        Student nadjenStudent;
-//        System.out.println("Unesite indeks studenta u formatu E1, M2:");
-//        String indeks = ScannerWrapper.ocitajString().toUpperCase();
-//
-//        nadjenStudent = pronadjiStudenta(indeks);
-//        if (nadjenStudent == null) {
-//            System.out.println("Greska! Student sa indekskom " + indeks +
-//                    " ne postoji u evidenciji!");
-//        }
-//
-//        return nadjenStudent;
-//    }
-//
-//    public static Student pronadjiStudenta(String indeks) {
-//        Student pronadjenStudent = StudentDAO.pronadjiStudentaPoIndeksu(Application.conn, indeks);
-//        return pronadjenStudent;
-//    }
+    public static Student pronadjiStudenta() {
+        Student nadjenStudent;
+        System.out.println("Unesite indeks studenta u formatu E1, M2:");
+        String indeks = ScannerWrapper.ocitajString().toUpperCase();
+
+        nadjenStudent = pronadjiStudenta(indeks);
+        if (nadjenStudent == null) {
+            System.out.println("Greska! Student sa indekskom " + indeks +
+                    " ne postoji u evidenciji!");
+        }
+
+        return nadjenStudent;
+    }
+
+    public static Student pronadjiStudenta(String indeks) {
+        Student pronadjenStudent = StudentDAO.pronadjiStudentaPoIndeksu(Application.conn, indeks);
+        return pronadjenStudent;
+    }
 
 }

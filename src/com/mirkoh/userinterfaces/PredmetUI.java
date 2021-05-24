@@ -142,6 +142,19 @@ public class PredmetUI {
         return pronadjenPredmet;
     }
 
+    public static Predmet pronadjiPredmet() {
+        Predmet nadjenPredmet;
+        System.out.println("Unesite ime predmeta:");
+        String imePredmeta = ScannerWrapper.ocitajString();
+
+        nadjenPredmet = pronadjiPredmet(imePredmeta);
+        if(nadjenPredmet == null) {
+            System.out.println("Greska! Predmet sa imenom " + imePredmeta + " ne postoji!");
+        }
+
+        return nadjenPredmet;
+    }
+
     public static Predmet pronadjiPredmet(String nazivpredmeta) {
         Predmet predmet = PredmetDAO.pronadjiPredmetPoImenu(Application.conn, nazivpredmeta);
         return predmet;

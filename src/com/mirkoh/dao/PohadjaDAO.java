@@ -2,10 +2,7 @@ package com.mirkoh.dao;
 
 import com.mirkoh.model.Predmet;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,5 +24,25 @@ public class PohadjaDAO {
             e.printStackTrace();
         }
         return predmeti;
+    }
+
+    public static boolean dodajStudentaNaPredmet(Connection conn, int studentID, int predmetID) {
+        boolean dodato = false;
+        String query = "INSERT INTO pohadja (student_id, predmet_id) values (?,?)";
+        try {
+            PreparedStatement statement = conn.prepareStatement(query);
+            statement.setInt(1, studentID);
+            statement.setInt(2, predmetID);
+            if(statement.executeUpdate() == 1) {
+                dodato = true;
+            }
+            statement.close();
+        } catch (SQLException e) {
+            System.out.println("Nesto je krenulo po zlu!");
+            e.printStackTrace();
+        }
+
+        return dodato;
+
     }
 }
