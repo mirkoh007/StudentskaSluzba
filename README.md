@@ -32,7 +32,8 @@ Sta je za sada realizovano?
 ***
 Pocet je rad sa pohadjanjem predmeta  
 - Izlistaj predmete koje student pohadja
-- Izlistaj studente koji pohadjaju predmet
+- Izlistaj studente koji pohadjaju predmet  
+- Dodaj studenta na predmet
 
 ***  
 
