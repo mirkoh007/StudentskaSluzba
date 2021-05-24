@@ -9,6 +9,7 @@ import com.mirkoh.model.Predmet;
 import com.mirkoh.model.Student;
 import com.mirkoh.utils.ScannerWrapper;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PohadjaUI {
@@ -37,6 +38,10 @@ public class PohadjaUI {
                     dodajStudentaNaPredmet();
                     break;
 
+                case 4:
+                    ukloniStudentaSaPredmeta();
+                    break;
+
                 default:
                     System.out.println("Nepostojeca komanda!!");
                     break;
@@ -50,6 +55,7 @@ public class PohadjaUI {
         System.out.println("\tOpcija broj 1 - Predmeti koje student pohadja");
         System.out.println("\tOpcija broj 2 - Studenti koji pohadjaju predmet");
         System.out.println("\tOpcija broj 3 - Dodaj studenta na predmet");
+        System.out.println("\tOpcija broj 4 - Ukloni studenta sa predmeta");
         System.out.println("\tOpcija broj 0 - IZLAZ");
     }
 
@@ -70,8 +76,18 @@ public class PohadjaUI {
     }
 
     public static void ispisiStudenteZaPredmet() {
+        System.out.println("Unesi ime predmeta: ");
         String imePredmeta = ScannerWrapper.ocitajString();
         Predmet predmet = PredmetDAO.pronadjiPredmetPoImenu(Application.conn, imePredmeta);
+        if(predmet != null) {
+            List<Student> studenti = PohadjaDAO.pronadjiStudenteZaPredmet(Application.conn, predmet.getId());
+            if(!studenti.isEmpty()) {
+                System.out.println("\nStudenti koji pohadjaju predmet: " + imePredmeta + " su:");
+                studenti.forEach(System.out::println);
+            } else {
+                System.out.println("Predmet ne pohadja ni jedan student");
+            }
+        }
 
     }
 
@@ -87,6 +103,22 @@ public class PohadjaUI {
             System.out.println("Uspesno dodat student na predmet");
         } else {
             System.out.println("Neuspesno dodavanje");
+        }
+    }
+
+    public static void ukloniStudentaSaPredmeta() {
+        Student student = StudentUI.pronadjiStudenta();
+        Predmet predmet = PredmetUI.pronadjiPredmet();
+        boolean uklonjen = false;
+
+        if(student != null && predmet != null) {
+            uklonjen = PohadjaDAO.ukloniStudentaSaPredmeta(Application.conn, student.getId(), predmet.getId());
+        }
+
+        if(uklonjen) {
+            System.out.println("Uspesno uklonjeno!");
+        } else {
+            System.out.println("Neuspesno uklanjanje!");
         }
     }
 }
